@@ -10,7 +10,7 @@ class Todo {
     Long lastUpdated
     Priority priority = Priority.LOW
 
-//    static belongsTo = [collection: TodoGroup]
+    static belongsTo = [collection: TodoGroup]
 
     def beforeInsert = {
         dateCreated = lastUpdated = new Date().time
