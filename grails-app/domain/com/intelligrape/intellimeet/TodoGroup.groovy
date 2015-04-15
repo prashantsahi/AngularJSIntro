@@ -1,14 +1,17 @@
 package com.intelligrape.intellimeet
 
 import grails.converters.JSON
+import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.Resource
 
-@Resource(uri = "/api/group", formats = ['json', 'xml'])
+@Secured('permitAll')
+@Resource(uri = "/rest/api/group", formats = ['json', 'xml'])
 class TodoGroup {
     String ownedBy = "Sahi"
     String name
 
     static hasMany = [todos: Todo]
+    static belongsTo = [user:TodoUser]
 
     static mapping = {
 //        todos fetch: 'join'

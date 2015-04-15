@@ -1,6 +1,9 @@
 <!doctype html>
 <html>
 <head>
+    %{--<meta name="layout" content="main"/>--}%
+    <title>Dashboard</title>
+
     <asset:stylesheet src="bootstrap.css"/>
 
     <!-- Add custom CSS here -->
@@ -29,6 +32,13 @@
 </head>
 
 <body ng-app="todo">
+<script>
+   var userId= ${sec.loggedInUserInfo(field:'id')}
+</script>
+<div>
+    <g:link name="logout" method="post" uri='/j_spring_security_logout'>Logout</g:link>
+</div>
+
 <h1>DEMO</h1>
 
 <div ng-controller="TodoCtrl">
@@ -36,7 +46,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1>{{username}} TODO's
+                <h1><sec:loggedInUserInfo field="username"/> TODO's
                     <small>A Blank Slate</small>
                 </h1>
             </div>
@@ -88,9 +98,10 @@
 
             <div ng-repeat="groupValue in group">
                 <div class="col-lg-6">
-                    <div class="panel panel-primary" %{--color--}%>{{groupValue.name}}
+                    <div class="panel panel-primary" color>{{groupValue.name}}
                         <button %{--value="DeleteGroup"--}% ng-click="removeTodoGroup(groupValue)"
-                               class="btn btn-xs btn-danger" style="float: right;">DeleteGroup</button>
+                                                            class="btn btn-xs btn-danger"
+                                                            style="float: right;">DeleteGroup</button>
                         <ul class="list-group">
                             <li class="list-group-item "
                                 ng-repeat="value in groupValue.todos%{--|orderBy:'completed'--}%"

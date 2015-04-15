@@ -1,8 +1,10 @@
 package com.intelligrape.intellimeet
 
+import grails.plugin.springsecurity.annotation.Secured
 import grails.rest.Resource
 
-@Resource(uri = "/api/todo", formats = ['json', 'xml'])
+@Secured('permitAll')
+@Resource(uri = "/rest/api/todo", formats = ['json', 'xml'])
 class Todo {
     String task
     Boolean completed = false

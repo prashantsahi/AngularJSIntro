@@ -17,6 +17,9 @@
     <!-- JavaScript -->
     <asset:javascript src="jquery-1.10.2.js"/>
     <asset:javascript src="bootstrap.js"/>
+    <asset:javascript src="angular-1.2.16.js"/>
+    <asset:javascript src="todo.js"/>
+
     <g:layoutHead/>
 </head>
 

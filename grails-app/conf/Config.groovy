@@ -117,3 +117,31 @@ log4j.main = {
             'org.hibernate',
             'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.auth.loginFormUrl = '/display/homePage'
+grails.plugin.springsecurity.logout.afterLogoutUrl = '/display/homePage'
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/'
+grails.plugin.springsecurity.failureHandler.defaultTargetUrl = '/'
+
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.intelligrape.intellimeet.TodoUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.intelligrape.intellimeet.TodoUserTodoRole'
+grails.plugin.springsecurity.authority.className = 'com.intelligrape.intellimeet.TodoRole'
+
+
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+        '/'              : ['permitAll'],
+//	'/index':                         ['permitAll'],
+//	'/index.gsp':                     ['permitAll'],
+        '/assets/**'     : ['permitAll'],
+        '/**/js/**'      : ['permitAll'],
+        '/**/css/**'     : ['permitAll'],
+        '/**/images/**'  : ['permitAll'],
+        '/**/favicon.ico': ['permitAll'],
+        '/todo/**'       : ['permitAll'],
+        '/todoGroup/**'  : ['permitAll'],
+        '/todoUser/**'   : ['permitAll'],
+        '/demoReview'    : ['ROLE_COMMON'],
+        '/display/**'    : ['permitAll']
+]
+
