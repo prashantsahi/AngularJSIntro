@@ -63,7 +63,7 @@ todo.controller("TodoCtrl", ['$scope', '$http', function ($scope, $http) {
 
     $scope.addTodo = function (taskName, groupID) {
         //alert(groupID + "  TASK:  " + taskName);
-        var dataObj = {task: taskName, collection: groupID};
+        var dataObj = {task: taskName, collection: groupID/*,username:'admin',password:'secret'*/};
         /*  $http.get('http://localhost:8080/rest/api/todo.json').success(function (data) {
          $scope.store = data;
          }).error(function () {

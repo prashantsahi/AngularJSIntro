@@ -25,6 +25,14 @@ class DisplayController extends LoginController {
         redirect(action: "homePage");
     }
 
+    /*def app() {
+        render(view: "/app")
+    }
+*/
+  def displayDemoReview(){
+      render(view: '/demoReview')
+  }
+
     def index() {
         if (springSecurityService.isLoggedIn()) {
             println "from index: user logged in"

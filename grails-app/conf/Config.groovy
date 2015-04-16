@@ -116,13 +116,17 @@ log4j.main = {
             'org.springframework',
             'org.hibernate',
             'net.sf.ehcache.hibernate'
+    debug 'org.springframework.security'
+    debug 'grails.plugin.springsecurity.rest'
 }
 
 // Added by the Spring Security Core plugin:
 grails.plugin.springsecurity.auth.loginFormUrl = '/display/homePage'
 grails.plugin.springsecurity.logout.afterLogoutUrl = '/display/homePage'
-grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/'
-grails.plugin.springsecurity.failureHandler.defaultTargetUrl = '/'
+grails.plugin.springsecurity.successHandler.alwaysUseDefault = true
+grails.plugin.springsecurity.successHandler.defaultTargetUrl = '/display/displayDemoReview'
+grails.plugin.springsecurity.failureHandler.alwaysUseDefault = true
+grails.plugin.springsecurity.failureHandler.defaultTargetUrl = '/display/homePage'
 
 grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.intelligrape.intellimeet.TodoUser'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.intelligrape.intellimeet.TodoUserTodoRole'
@@ -138,10 +142,22 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/**/css/**'     : ['permitAll'],
         '/**/images/**'  : ['permitAll'],
         '/**/favicon.ico': ['permitAll'],
-        '/todo/**'       : ['permitAll'],
-        '/todoGroup/**'  : ['permitAll'],
-        '/todoUser/**'   : ['permitAll'],
+        '/todo/**'       : ['ROLE_COMMON'],
+        '/todoGroup/**'  : ['ROLE_COMMON'],
+        '/todoUser/**'   : ['ROLE_COMMON'],
         '/demoReview'    : ['ROLE_COMMON'],
-        '/display/**'    : ['permitAll']
+        '/display/**'    : ['permitAll'],
+        '/app'           : ['ROLE_COMMON'],
+
 ]
 
+
+grails.plugin.springsecurity.filterChain.chainMap = [
+        '/rest/**': 'JOINED_FILTERS,-exceptionTranslationFilter,-authenticationProcessingFilter,-securityContextPersistenceFilter,-rememberMeAuthenticationFilter',  // Stateless chain
+        '/**'     : 'JOINED_FILTERS,-restTokenValidationFilter,-restExceptionTranslationFilter'                                                                          // Traditional chain
+]
+grails.plugin.springsecurity.rest.login.useJsonCredentials = true
+grails.plugin.springsecurity.rest.token.storage.useGorm = true
+grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName = 'com.intelligrape.intellimeet.AuthenticationToken'
+grails.plugin.springsecurity.rest.login.endpointUrl = '/rest/login'
+grails.plugin.springsecurity.rest.logout.endpointUrl = '/rest/logout'
