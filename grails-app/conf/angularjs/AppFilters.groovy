@@ -5,7 +5,7 @@ class AppFilters {
     def filters = {
         all(controller:'*', action:'*') {
             before = {
-//                println "Controller : ${controllerName}, Action : ${actionName}"
+                println "Controller : ${controllerName}, Action : ${actionName}"
             }
             after = { Map model ->
 

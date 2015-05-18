@@ -130,6 +130,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+
     <asset:stylesheet src="bootstrap.css"/>
 
     <!-- Add custom CSS here -->
@@ -145,13 +146,40 @@
     <asset:javascript src="jquery-1.10.2.js"/>
     <asset:javascript src="bootstrap.js"/>
     <asset:javascript src="angular-1.2.16.js"/>
+    <asset:javascript src="angular-ui-router.js"/>
     <asset:javascript src="todo.js"/>
 
+    %{--<script>
+        $(document).on('click', "#login", function () {
+            console.log($(this).attr('data-ajax-url'));
+//        console.log($(this).attr('data-resourceId'));
+            var username = document.getElementById("username1").value;
+            var password = document.getElementById("password1").value;
+            console.log("username : " + username + "   password :" + password);
+//            var dataObj = {username: username, password: password}
+//        console.log($(this).attr('id'));
+//        console.log($(this).attr('data-flag'));
+            $.ajax({
+                url: "/rest/login",
+                type: 'POST',
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                traditional: false,
+                data: {username: "admin", password: "secret"},
+                success: function (data) {
+                    console.log(data)
+                }, failure: function () {
+                    console.log("request failure");
+                }
+            });
+        });
+    </script>
+--}%
     <title>::HomePage::</title>
 </head>
 
-<body>
-<div class="row">
+<body ng-app="todo">
+<div class="row" ui-view>
     <div class="col-lg-1"></div>
 
     <div class="col-lg-4">
@@ -188,12 +216,6 @@
                     </div><br>
 
 
-                %{--            <div>
-                                <span class="span-label1">Confirm Password</span>
-                                <g:textField name="confirmPassword" placeholder="Retype Password"/>
-                            </div><br>--}%
-
-
                     <div>
                         <g:actionSubmit action="register" name="register" value="Register"
                                         style="float:left; margin-right: 150px"/>
@@ -205,69 +227,73 @@
 
     <div class="col-lg-2"></div>
 
-%{--
 
-    <div class="col-lg-4">
+    <div class="col-lg-4" ng-app="todo">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">Login</h3>
             </div>
 
-            <div class="panel-body">
-                <g:form class="form-box" name="login" controller="login">
+            <div class="panel-body" ng-controller="loginController">
+                <form class="form-box" name="loginForm" ng-submit="loginForm.$valid && loginMethod(login1.username,login1.password)">
                     <div>
                         <span class="span-label1">UserName*</span>
-                        <g:textField name="username" placeholder="UserName"/>
+                        <input type="text" id="username1" required ng-model="login1.username" name="username"
+                               placeholder="UserName"/>
                     </div><br>
+
+                    <p>{{login1.username}}</p>
 
                     <div>
                         <span class="span-label1">Password*</span>
-                        <g:passwordField name="password" placeholder="Password"/>
+                        <input type="password" id="password1" required ng-model="login1.password" name="password"
+                               placeholder="Password"/>
                     </div><br>
+                    {{login1.password}}
+                   %{-- <span><g:link controller="login"
+                                  action="showForgotPassword">Forgot Password</g:link></span>--}%
 
-         <span><g:link controller="login"
-                                       action="showForgotPassword">Forgot Password</g:link></span>
-                         <span></span>
-
-                    <g:actionSubmit name="button" value="Login" action="loginHandler"
-                                    style="float:right;margin-right: 150px"/>
-                </g:form>
+                    <input type="submit" name="button" value="Login" id="login"
+                           style="float:right;margin-right: 150px"/>
+                </form>
             </div>
         </div>
     </div>
 
---}%
 
-    <div class="col-lg-4">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Login</h3>
-            </div>
+    %{--
+         <div class="col-lg-4">
+             <div class="panel panel-primary">
+                 <div class="panel-heading">
+                     <h3 class="panel-title">Login</h3>
+                 </div>
 
-            <div class="panel-body">
-                <g:form name="login" method="POST"  uri="/j_spring_security_check">
-                    <ul>
-                        <li>
-                            <label for="j_username">Username:</label>
-                            <g:textField name="j_username"/>
-                        </li>
-                        <li>
-                            <label for="j_password">Password:</label>
-                            <g:passwordField name="j_password"/>
-                        </li>
-                    </ul>
-                    <div class="button-panel">
-                        <g:submitButton name="banner-login-button" value="Log in" />
-                    </div>
-                </g:form>
-            </div>
-        </div>
-    </div>
+                 <div class="panel-body">
+                     <g:form name="login" method="POST"  uri="/j_spring_security_check">
+                         <ul>
+                             <li>
+                                 <label for="j_username">Username:</label>
+                                 <g:textField name="j_username"/>
+                             </li>
+                             <li>
+                                 <label for="j_password">Password:</label>
+                                 <g:passwordField name="j_password"/>
+                             </li>
+                         </ul>
+                         <div class="button-panel">
+                             <g:submitButton name="banner-login-button" value="Log in" />
+                         </div>
+                     </g:form>
+                 </div>
+             </div>
+         </div>
+    --}%
 
 
     <div class="col-lg-1"></div>
 
 </div>
+%{--<div ui-view></div>--}%
 
 </body>
 </html>

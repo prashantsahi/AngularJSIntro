@@ -6,8 +6,9 @@ class UrlMappings {
                 // apply constraints here
             }
         }
-
-        "/"(view:"/demoReview")
+//        "/rest/login"(controller:"display",action: "homePage")
+//        "/rest/logout"(controller:"display",action: "homePage")
+        "/"(view:"/display/homePage")
         "500"(view:'/error')
 	}
 }

@@ -7,11 +7,14 @@ import grails.plugin.springsecurity.LoginController
 import grails.plugin.springsecurity.SpringSecurityUtils
 import org.springframework.security.access.annotation.Secured
 
+
 @Secured(['permitAll'])
 class DisplayController extends LoginController {
-
+def springSecurityService
     def homePage() {
+        render(view: "homePage")
         println("from homepage")
+        println "----------------------------------------------------->>>>>>>>>>>>>>>>>"+params
     }
 
     def register() {
@@ -29,12 +32,13 @@ class DisplayController extends LoginController {
         render(view: "/app")
     }
 */
-  def displayDemoReview(){
-      render(view: '/demoReview')
+  def demoReview(){
+      println("from demoReview");
+      render(view: '/display/demoReview')
   }
 
     def index() {
-        if (springSecurityService.isLoggedIn()) {
+        if (springSecurityService.isLoggedIn()) {isLoggedIn
             println "from index: user logged in"
             redirect uri: SpringSecurityUtils.securityConfig.successHandler.defaultTargetUrl
 
@@ -52,10 +56,10 @@ class DisplayController extends LoginController {
 
         def config = SpringSecurityUtils.securityConfig
 
-        if (springSecurityService.isLoggedIn()) {
+/*        if (springSecurityService.isLoggedIn()) {
             redirect uri: config.successHandler.defaultTargetUrl
             return
-        }
+        }*/
 
         String view = '/display/homePage'
         String postUrl = "${request.contextPath}${config.apf.filterProcessesUrl}"

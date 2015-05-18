@@ -118,6 +118,7 @@ log4j.main = {
             'net.sf.ehcache.hibernate'
     debug 'org.springframework.security'
     debug 'grails.plugin.springsecurity.rest'
+    debug 'grails.plugin.springsecurity.rest.RestOauthController'
 }
 
 // Added by the Spring Security Core plugin:
@@ -148,6 +149,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/demoReview'    : ['ROLE_COMMON'],
         '/display/**'    : ['permitAll'],
         '/app'           : ['ROLE_COMMON'],
+//        '/rest/**'       : ['permitAll']
 
 ]
 
@@ -158,6 +160,7 @@ grails.plugin.springsecurity.filterChain.chainMap = [
 ]
 grails.plugin.springsecurity.rest.login.useJsonCredentials = true
 grails.plugin.springsecurity.rest.token.storage.useGorm = true
+grails.plugin.springsecurity.rest.login.failureStatusCode = 401
 grails.plugin.springsecurity.rest.token.storage.gorm.tokenDomainClassName = 'com.intelligrape.intellimeet.AuthenticationToken'
 grails.plugin.springsecurity.rest.login.endpointUrl = '/rest/login'
 grails.plugin.springsecurity.rest.logout.endpointUrl = '/rest/logout'

@@ -1,7 +1,7 @@
-<!doctype html>
+%{--<!doctype html>
 <html>
 <head>
-    %{--<meta name="layout" content="main"/>--}%
+    --}%%{--<meta name="layout" content="main"/>--}%%{--
     <title>Dashboard</title>
 
     <asset:stylesheet src="bootstrap.css"/>
@@ -13,6 +13,7 @@
     <asset:javascript src="jquery-1.10.2.js"/>
     <asset:javascript src="bootstrap.js"/>
     <asset:javascript src="angular-1.2.16.js"/>
+    <asset:javascript src="angular-ui-router.js"/>
     <asset:javascript src="todo.js"/>
 
     <style>.ng-invalid.ng-dirty {
@@ -31,17 +32,17 @@
 
 </head>
 
-<body ng-app="todo">
-<script>
+<body ng-app="todo">--}%
+%{--<script>
    var userId= ${sec.loggedInUserInfo(field:'id')}
-</script>
+</script>--}%
 <div>
     <g:link name="logout" method="post" uri='/j_spring_security_logout'>Logout</g:link>
 </div>
 
 <h1>DEMO</h1>
 
-<div ng-controller="TodoCtrl">
+<div>
     %{--{{store}}--}%
     <div id="page-wrapper">
         <div class="row">
@@ -146,7 +147,7 @@
         </div>
     </div><!-- /#page-wrapper -->
 </div>
-</body>
+%{--</body>
 
-</html>
+</html>--}%
 
