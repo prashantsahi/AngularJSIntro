@@ -49,7 +49,7 @@ todo.controller("TodoCtrl", ['$scope', '$http', '$rootScope', function ($scope, 
         return $scope.tab === checkTab;
     }
 
-    var userId = 2; c 
+    var userId = 2; 
 //end of selection
 
     $http.get('http://localhost:8080/rest/api/todoUser/' + userId + '.json' + '?access_token=' + $rootScope.access_token).success(function (data) {
